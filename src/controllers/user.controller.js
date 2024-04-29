@@ -1,15 +1,22 @@
 'use strict';
 
-const { OK, CREATED } = require('../core/success.response');
 const UserService = require('../services/user.service');
-
+const { OK } = require('../helpers/index');
 
 class UserController {
-    get_list_users = async (req, res, next) => {
-        new OK({
-            message: 'Users retrieved successfully',
-            metadata: await UserService.get_all()
-        }).send(res);
+    async get_list_users(req, res, next) {
+        try {
+            // Assuming you want to fetch users using UserService
+            const users = await UserService.getUsers();
+            // Sending a response with the fetched users
+            res.status(200).json({
+                message: 'Users retrieved successfully',
+                data: users
+            });
+        } catch (error) {
+            // If an error occurs, pass it to the error-handling middleware
+            next(error);
+        }
     }
 }
 

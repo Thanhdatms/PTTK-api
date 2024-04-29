@@ -1,10 +1,11 @@
 require('dotenv').config()
 const express = require('express');
+const admin_api = require('./routes/index');
+const { sequelize } = require('./databases/init.mysql')
 
 const app =  express();
 
-
-const { sequelize } = require('./databases/init.mysql')
+app.use('/v1/admin', admin_api);
 
 app.get('/', (req, res) => {
     res.json({

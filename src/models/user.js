@@ -1,33 +1,27 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
       User.hasOne(models.Cart, {
         foreignKey: 'user_id',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
-      })
+      });
     }
   }
+  
   User.init({
     id: {
       allowNull: false,
       primaryKey: true,
-      type: DataTypes.UUID
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4 // Assuming you want to use UUIDv4 as default
     },
-    
     username: {
       allowNull: false,
-      type: Model.UUID
+      type: DataTypes.STRING // Corrected data type to string
     },
     email: {
       allowNull: false,
@@ -51,5 +45,6 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true,
     paranoid: true
   });
+  
   return User;
 };
