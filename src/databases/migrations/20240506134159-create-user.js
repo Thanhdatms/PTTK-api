@@ -1,37 +1,38 @@
 'use strict';
+const { DataTypes } = require('sequelize');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('User', {
       id: {
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      id: {
-        allowNull: false,
-        primaryKey: true,
-        type: Sequelize.STRING
-      },
-      username: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.UUID,
+        primaryKey: true
       },
       email: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
       },
-      hashPassword: {
-        type: Sequelize.STRING,
+      hash_password: {
+        type: DataTypes.STRING,
         allowNull: false
       },
-      refreshToken: {
-        type: Sequelize.STRING,
-        allowNull: true
+      first_name: {
+        type: DataTypes.STRING,
+        allowNull: false
       },
-      isActive: {
-        type: Sequelize.BOOLEAN
+      last_name: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      refresh_token: { 
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      is_active: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
