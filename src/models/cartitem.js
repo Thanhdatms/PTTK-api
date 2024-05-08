@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       CartItem.belongsTo(models.Cart, {
         foreignKey: 'cart_id',
       });
+
+      CartItem.belongsTo(models.Product, {
+        foreignKey: 'product_id'
+      })
     }
   }
   CartItem.init({

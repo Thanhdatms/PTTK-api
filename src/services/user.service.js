@@ -5,7 +5,7 @@ class UserService {
     static getUsers = async () => {
         try {
             const users = await db.User.findAll({
-                attributes: ['username', 'email']
+                attributes: [ 'email']
             });
             return users;
         } catch (error) {
